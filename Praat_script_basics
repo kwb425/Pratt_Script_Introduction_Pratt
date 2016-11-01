@@ -1,0 +1,400 @@
+#################################################################################
+# Praat Scripting:
+# 1. Indentation (space) has no effect.
+# 2. Variables are not variables until they get assigned.
+# 3. All variables are global.
+# 4. command + r for run (whole)
+# 5. command + t for run (selection)
+# 6. command + h for pasting history of your clicks into codes
+#
+# 												           Written by Kim, Wiback,
+#                                                               2016.10.24, v1.3.
+#                                                               2016.10.31, v1.3.
+#                                                               2016.11.02, v1.3.
+#################################################################################
+
+
+
+
+
+## Information Window ###########################################################
+
+
+
+##################
+# Without New Line
+##################
+
+### Pre-allocating (X)
+
+### Printing (O)
+clearinfo
+writeInfo: 1
+appendInfo: "a"
+
+
+
+###############
+# With New Line
+###############
+
+### Pre-allocating (X)
+
+### Printing (O)
+clearinfo
+writeInfoLine: 2
+appendInfoLine: "b"
+
+
+
+
+
+## Variables ####################################################################
+
+
+
+#########
+# Numeric
+#########
+
+### Pre-allocating (O)
+numeric_var_1 = -9
+numeric_var_2 = numeric_var_1 + numeric_var_1
+numeric_var_3 = numeric_var_1 * numeric_var_2
+numeric_var_4 = numeric_var_1 - numeric_var_2
+numeric_var_5 = numeric_var_1^numeric_var_2 
+numeric_var_6 = numeric_var_1 / numeric_var_2   
+numeric_var_7 = numeric_var_1 div numeric_var_2 
+numeric_var_8 = numeric_var_1 mod numeric_var_2 
+numeric_var_9 = sqrt: numeric_var_1
+numeric_var_10 = abs: numeric_var_1
+numeric_var_11 = round: -5.12321
+numeric_var_12 = ceiling: -5.12321
+numeric_var_13 = floor: -5.12321
+numeric_var_14 = min: numeric_var_1, numeric_var_2
+numeric_var_15 = max: numeric_var_1, numeric_var_2
+boolean_1 = numeric_var_1 == numeric_var_2
+boolean_2 = numeric_var_1 != numeric_var_2
+boolean_3 = numeric_var_1 >= numeric_var_2
+boolean_4 = numeric_var_1 <= numeric_var_2
+boolean_5 = numeric_var_1 && numeric_var_2
+boolean_6 = numeric_var_1 || numeric_var_2
+
+### Printing (O)
+clearinfo
+appendInfoLine: numeric_var_1, numeric_var_2, numeric_var_3, 
+				... numeric_var_4, numeric_var_5, numeric_var_6,
+				... numeric_var_7, numeric_var_8, numeric_var_9, 
+				... numeric_var_10, numeric_var_11, 
+				... numeric_var_12, numeric_var_13,
+				... numeric_var_14, numeric_var_15, 
+				... boolean_1, boolean_2, boolean_3, boolean_4, 
+			    ... boolean_5, boolean_6
+
+
+
+########
+# String
+########
+
+### Pre-allocating (O)
+string_var_1$ = "alpha222omega"
+alpha$ = left$: string_var_1$, 5 
+omega$ = right$: string_var_1$, 5
+two$ = mid$: string_var_1$, 6, 3
+string_var_2$ = string_var_1$ + " " + string_var_1$
+length_of_string = length: string_var_2$
+
+### Printing (O)
+clearinfo
+appendInfoLine: """", alpha$, two$, omega$, length_of_string, """"
+
+
+
+
+
+## Data Structures ##############################################################
+
+
+
+#######
+# Array
+#######
+
+### Pre-allocating (O)
+array_numeric[1] = 1
+array_numeric[2] = 2
+array_string$[1] = "a"
+array_string$[2] = "b"
+
+### Printing (O)
+clearinfo
+appendInfoLine: array_numeric[1], array_string$[1], 
+				... array_numeric[2], array_string$[2]
+
+
+
+############
+# Dictionary
+############
+
+### Pre-allocating (O)
+dict_numeric["key"] = 1
+dict_string$["key"] = "a"
+dict_string$["Wiback"] = "b"
+
+### Printing (O)
+clearinfo
+appendInfoLine: dict_numeric["key"], dict_string$["key"], 
+				... dict_string$["Wiback"]
+
+
+
+
+
+## Flow Control #################################################################
+
+
+
+#################################################
+# For: for x [from starting] to ending ... endfor
+#################################################
+
+### Pre-allocating (X)
+
+### Printing (O)
+clearinfo
+for each_iteration from 1 to 10
+	appendInfoLine: "Iteration #: ", each_iteration
+endfor
+
+
+
+#####################################
+# While: while condition ... endwhile
+#####################################
+
+### Pre-allocating (O)
+condition_checker = 9999
+
+### Printing (O)
+clearinfo
+while (round: condition_checker) > 10
+	condition_checker = condition_checker / 2
+	appendInfoLine: "Exit below 10: ", condition_checker
+endwhile
+
+
+
+##############################################################
+# If: if condition_1 ... [elif condition_2 ...] else ... endif
+##############################################################
+
+### Pre-allocating (O)
+condition_checker = 1
+
+### Printing (O)
+clearinfo
+if condition_checker < 5
+	appendInfoLine: "If condition is met."
+elif condition_checker > 5
+	appendInfoLine: "Else if condition is met."
+else
+	appendInfoLine: "Other conditions are met."
+endif 
+
+
+
+
+
+## Procedure ####################################################################
+
+
+
+#######################
+# Procedure != Function
+#######################
+
+### Pre-allocating (O)
+procedure procedure_to_be_called: parameter
+    Create Sound as pure tone: "tone", 1, 0, 0.4, 44100, parameter, 
+	... 0.2, 0.01, 0.01
+    Play
+    Remove
+    Create Sound as pure tone: "tone", 1, 0, 0.4, 44100, parameter * 2, 
+	... 0.2, 0.01, 0.01
+    Play
+    Remove
+endproc
+
+### Printing (O, calling)
+@procedure_to_be_called: 440
+
+
+
+
+
+## Objects: ID. Fullname (Type + Name) ##########################################
+
+
+
+######################################################################
+# Creating; Clickable menus in Pratt Objects window are all available.
+######################################################################
+
+### Pre-allocating (O)
+Create Sound from formula: 
+... "sound_1", 1, 0, 1, 44100, "1/2 * sin(2*pi*377*x) + randomGauss(0,0.1)"
+Create Sound from formula: 
+... "sound_2", 1, 0, 1, 44100, "1/2 * sin(2*pi*377*x) + randomGauss(0,0.1)"
+Create Sound from formula: 
+... "sound_3", 1, 0, 1, 44100, "1/2 * sin(2*pi*377*x) + randomGauss(0,0.1)"
+Create Sound from formula: 
+... "sound_4", 1, 0, 1, 44100, "1/2 * sin(2*pi*377*x) + randomGauss(0,0.1)"
+Create Sound from formula: 
+... "sound_5", 1, 0, 1, 44100, "1/2 * sin(2*pi*377*x) + randomGauss(0,0.1)"
+
+### Printing (X)
+
+
+
+##########################################
+# Selecting; Use either ID or Type + Name.
+##########################################
+
+### Pre-allocating (O)
+selectObject: "Sound sound_1", "Sound sound_2"
+minusObject: "Sound sound_1", "Sound sound_2"
+plusObject: "Sound sound_1", "Sound sound_2", "Sound sound_3", 
+			... "Sound sound_4", "Sound sound_5"
+
+### Printing (X)
+
+
+
+##########
+# Counting
+##########
+
+### Pre-allocating (O)
+how_many_sound = numberOfSelected: "Sound"
+
+### Printing (O)
+clearinfo
+appendInfoLine: "Total number of sounds selected: ", how_many_sound
+
+
+
+###############
+# ID & Fullname
+###############
+
+### Pre-allocating (O)
+# id of selected object, given type and order
+id = selected: "Sound", 4
+# Fullname of selected object, given order
+full_name$ = selected$: 4
+
+### Printing (O)
+clearinfo
+appendInfoLine: "ID: ", id, tab$, "Fullname: ", full_name$
+
+
+
+#########
+# Closing
+#########
+
+### Pre-allocating (O)
+removeObject: "Sound sound_2"
+removeObject: "Sound sound_3"
+removeObject: "Sound sound_4"
+removeObject: "Sound sound_5"
+
+### Printing (X)
+
+
+
+##########
+# Analysis
+########## 
+
+### Pre-allocating (X)
+
+### Printing (O, calling)
+View & Edit
+Play
+
+
+
+
+
+## User Interaction #############################################################
+
+
+
+#############
+# Form == GUI
+#############
+
+### Pre-allocating (X)
+
+### Printing (X)
+
+### Independent fields
+# natural: "variable_to_receive_value", initial_value
+# integer: "variable_to_receive_value", initial_value 
+# positive: "variable_to_receive_value", initial_value
+# real: "variable_to_receive_value", initial_value
+# boolean: "variable_to_receive_value", initial_value 
+# word: "variable_to_receive_text", "initial_text"
+# sentence: "variable_to_receive_text", "initial_text"
+# text: "variable_to_receive_text", "initial_text"
+# comment: "text"
+
+### Dependent fields
+# choice: "variable_to_receive_value", initial_value
+# button: "text"
+# option: "text"
+
+
+
+#########
+# Example
+#########
+
+### Pre-allocating (X)
+
+### Printing (O)
+clearinfo
+for each_pause from 1 to 3
+    beginPause: "STOP!"
+	    comment: "Give me your rice cakes, then I will let you go."
+    	natural: "num_of_rice_cake", 10
+	    integer: "how_many_to_give", 3
+   		positive: "how_fast_you_can_run", 60.2
+		real: "how_fast_be_precise", 60.23
+		word: "your_last_name", "Kim"
+	    sentence: "your_first_name", "Bab"
+	    text: "any_last_words", "Damm!"
+	    boolean: "you_gonna_run?", 1
+	    choice: "run_direction", 1
+			option: "north"
+			option: "east"
+			option: "south"
+			option: "west"
+		optionMenu: "direction_be_precise", 2
+    	    option: "north east"
+        	option: "north west"
+        	option: "south east"
+			option: "south west"
+	clicked = endPause: "Continue", "Next", "Proceed", 2
+	appendInfoLine: "You (", your_last_name$, ", ", your_first_name$, 
+					... ") have ", num_of_rice_cake, " rice cakes."
+	appendInfoLine: "And you can run at speed of ", 
+					... how_fast_you_can_run, " (", how_fast_be_precise, ")."
+	appendInfoLine: "You can either give ", how_many_to_give, 
+					... " cakes or run to death."
+	appendInfoLine: "And you're thinking ", run_direction$, 
+					... " (",  direction_be_precise$, ")", " in mine."
+endfor
