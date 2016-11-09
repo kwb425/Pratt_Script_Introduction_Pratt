@@ -8,9 +8,10 @@
 # 6. command + h for pasting history of your clicks into codes
 #
 # 												           Written by Kim, Wiback,
-#                                                               2016.10.24, v1.3.
-#                                                               2016.10.31, v1.3.
+#                                                               2016.10.24, v1.1.
+#                                                               2016.10.31, v1.2.
 #                                                               2016.11.02, v1.3.
+#                                                               2016.11.09, v1.4.
 #################################################################################
 
 
@@ -398,3 +399,43 @@ for each_pause from 1 to 3
 	appendInfoLine: "And you're thinking ", run_direction$, 
 					... " (",  direction_be_precise$, ")", " in mine."
 endfor
+
+
+
+
+
+## Reading Inputs & Output Gathering ############################################
+sample_full_path_dir_in$ = "/Users/KimWiback/Google_Drive/Git/Pratt_Script_Introduction_Pratt/"
+sample_full_path_file_in$ = "/Users/KimWiback/Google_Drive/Git/Pratt_Script_Introduction_Pratt/README.md"
+sample_full_path_dir_out$ = "/Users/KimWiback/Google_Drive/Git/Pratt_Script_Introduction_Pratt/Output"
+sample_full_path_file_out$ = "/Users/KimWiback/Google_Drive/Git/Pratt_Script_Introduction_Pratt/Output/Output.txt"
+
+
+
+#########
+# Reading
+#########
+
+### Checking readability
+readable_dir = fileReadable: sample_full_path_dir_in$
+readable_file = fileReadable: sample_full_path_file_in$
+
+### Reading
+text$ = readFile$: sample_full_path_file_in$
+
+
+
+#########
+# Writing
+#########
+createDirectory: sample_full_path_dir_out$
+writeFileLine: sample_full_path_file_out$, "Contents"
+appendFileLine: sample_full_path_file_out$, text$
+
+
+
+##########
+# Deleting
+##########
+deleteFile: sample_full_path_file_out$
+deleteFile: sample_full_path_dir_out$

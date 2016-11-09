@@ -26,6 +26,6 @@ Please send any question to: <kwb425@icloud.com>
 [3]: https://github.com/kwb425/Pratt_Script_Introduction_Pratt/releases
 [4]: https://github.com/kwb425/Pratt_Script_Introduction_Pratt.git
 <!--Links to images, reference Markdowns-->
-[a]: https://img.shields.io/badge/Tag-v1.3-red.svg?style=plastic
-[b]: https://img.shields.io/badge/Release-v1.3-green.svg?style=plastic
+[a]: https://img.shields.io/badge/Tag-v1.4-red.svg?style=plastic
+[b]: https://img.shields.io/badge/Release-v1.4-green.svg?style=plastic
 [c]: https://img.shields.io/badge/Download-Click-blue.svg?style=plastic
